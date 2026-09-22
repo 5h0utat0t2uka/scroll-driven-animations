@@ -1,0 +1,34 @@
+@keyframes scroll {
+  0% {
+    transform-origin: 0% 0%;
+    transform: scaleY(0)
+  }
+  50% {
+    transform-origin: 0% 0%;
+    transform: scale(1)
+  }
+  50.1% {
+    transform-origin: 0% 100%;
+    transform: scale(1)
+  }
+  to {
+    transform-origin: 0% 100%;
+    transform: scaleY(0)
+  }
+}
+
+.border {
+  block-size: min(5svb, 50px);
+  background: color-mix(in srgb, white 50%, transparent);
+  /*translate: 0 min(-25px, -2.5svb);*/
+  display: grid;
+  &::after {
+    content: "";
+    inline-size: 1px;
+    align-self: end;
+    justify-self: center;
+    block-size: 100%;
+    background: white;
+    animation: scroll 1.5s cubic-bezier(1,0,0,1) infinite;
+  }
+}

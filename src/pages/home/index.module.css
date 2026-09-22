@@ -1,0 +1,26 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 16px;
+  ul {
+    padding-inline-start: 16px;
+  }
+  a[target] {
+    inline-size: fit-content;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.25ch;
+    &::after {
+      display: inline-grid;
+      content: '';
+      justify-self: end;
+      mask-image: var(--icon-arrow);
+      block-size: 0.8lh;
+      aspect-ratio: 1;
+      background-color: currentColor;
+      rotate: -45deg;
+    }
+  }
+}

@@ -1,0 +1,116 @@
+@keyframes scroll {
+	to {
+		transform: translateX(calc(-100% + 100svi));
+	}
+}
+
+.container {
+  --text-lg-min: 40px;
+  --text-lg-max: 56px;
+  --text-sm-min: 8px;
+  --text-sm-max: 12px;
+
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: clamp(
+      var(--text-lg-min),
+      var(--text-lg-min) + progress(100svi, 375px, 1280px) * (var(--text-lg-max) - var(--text-lg-min)),
+      var(--text-lg-max)
+    );
+  }
+  .hero, .footer {
+    block-size: 100svb;
+    display: grid;
+    background: blue;
+    color: whitesmoke;
+    text-align: center;
+  }
+  .hero {
+    > * {
+      grid-area: 1 / -1;
+    }
+    > h1 {
+      place-self: center;
+    }
+    > div {
+      place-self: end center;
+      mix-blend-mode: difference;
+    }
+  }
+  .footer {
+    place-content: center;
+    font-size: clamp(
+      var(--text-sm-min),
+      var(--text-sm-min) + progress(100svi, 375px, 1280px) * (var(--text-sm-max) - var(--text-sm-min)),
+      var(--text-sm-max)
+    );
+  }
+  .horizontal {
+    --block-size: 100dvb;
+    --column-size: min(90cqi, 640px);
+    --column-space: 32px;
+    --columns: 4;
+
+    container-type: size;
+    block-size: calc(var(--column-size) * var(--columns));
+    view-timeline-name: --section-pin-1;
+    view-timeline-axis: block;
+  	> .body {
+  	  contain: paint;
+      inline-size: 100cqi;
+      block-size: 100dvb;
+      /*block-size: var(--block-size);*/
+
+      position: sticky;
+      inset-block-start: 0;
+      align-items: center;
+      place-content: center;
+  		> .scroller {
+    		clip-path: inset(var(--column-space));
+        /*padding: var(--column-space);*/
+        display: grid;
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(0, 1fr);
+        gap: var(--column-space);
+        align-content: center;
+        min-inline-size: calc(var(--column-size) * var(--columns));
+        /*will-change: transform;*/
+        animation: linear scroll forwards;
+        animation-timeline: --section-pin-1;
+        animation-range: contain 0% contain 100%;
+        /*animation-range: contain var(--column-space) contain calc(100% - var(--column-space));*/
+        > .item {
+          block-size: var(--block-size);
+          block-size: 90svb;
+          &:nth-child(1) {
+            display: grid;
+            place-content: center;
+            container-type: inline-size;
+            gap: 0.25lh;
+            > h2 {
+              font-family: "Instrument Serif", serif;
+              font-weight: 100;
+              font-style: normal;
+              font-size: 5.6cqi;
+              font-weight: 700;
+            }
+            > p {
+              font-family: "Geist Pixel Square", monospace;
+              font-optical-sizing: auto;
+              font-style: normal;
+              font-size: 2.6cqi;
+              font-weight: 300;
+            }
+          }
+          > img {
+            aspect-ratio: 1920/2560;
+            block-size: 100%;
+            object-fit: cover;
+          }
+        }
+  		}
+  	}
+  }
+}
