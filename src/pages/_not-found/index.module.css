@@ -1,0 +1,12 @@
+.hgroup {
+  place-self: center;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  > h1 {
+    font-size: 18px;
+  }
+  > * {
+    text-box: trim-both cap alphabetic;
+  }
+}

@@ -1,0 +1,131 @@
+@keyframes parallax {
+  0% {
+    object-position: 100% 0;
+  }
+  100% {
+    object-position: 0 0;
+  }
+}
+@keyframes border {
+  0% {
+    transform-origin: 0% 0%;
+    transform: scaleX(0)
+  }
+  50% {
+    transform-origin: 0% 0%;
+    transform: scale(1)
+  }
+  50.1% {
+    transform-origin: 100% 0%;
+    transform: scale(1)
+  }
+  to {
+    transform-origin: 100% 0%;
+    transform: scaleX(0)
+  }
+}
+
+.container {
+  --text-lg-min: 40px;
+  --text-lg-max: 56px;
+  --text-sm-min: 8px;
+  --text-sm-max: 12px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+
+    font-size: clamp(
+      var(--text-lg-min),
+      var(--text-lg-min) + progress(100svi, 375px, 1280px) * (var(--text-lg-max) - var(--text-lg-min)),
+      var(--text-lg-max)
+    );
+  }
+  .hero, .footer {
+    block-size: 100svb;
+    display: grid;
+    background: blue;
+    color: whitesmoke;
+    text-align: center;
+  }
+  .hero {
+    > * {
+      grid-area: 1 / -1;
+    }
+    > h1 {
+      place-self: center;
+    }
+    > div {
+      place-self: end center;
+      mix-blend-mode: difference;
+    }
+  }
+  .footer {
+    place-content: center;
+    font-size: clamp(
+      var(--text-sm-min),
+      var(--text-sm-min) + progress(100svi, 375px, 1280px) * (var(--text-sm-max) - var(--text-sm-min)),
+      var(--text-sm-max)
+    );
+  }
+
+  .carousel {
+    display: grid;
+    place-content: center;
+    block-size: 100svb;
+    > * {
+      grid-area: 1/-1;
+      place-self: center;
+    }
+    > .list {
+      list-style: none;
+      padding: 0;
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-inline: contain;
+      overflow: auto;
+      inline-size: 80cqi;
+      margin-inline: auto;
+      /*margin-block-end: min(10svb, 72px);*/
+      display: grid;
+      grid-auto-columns: min(82%, 620px);
+      grid-auto-flow: column;
+      gap: 36px;
+      scrollbar-width: none;
+      > .item {
+        /*scroll-snap-align: start;*/
+        clip-path: inset(0 round 6px);
+        > img {
+          aspect-ratio: 2/3;
+          /*aspect-ratio: 3/4;*/
+          /*max-block-size: 80svb;*/
+          object-fit: cover;
+          object-position: 100% 0;
+          animation: parallax linear both;
+          animation-timeline: view(x);
+        }
+      }
+    }
+
+    > .border {
+      mix-blend-mode: difference;
+      /*inline-size: min(25cqi, 180px);*/
+      inline-size: min(20cqi, 100px);
+      margin-inline: auto;
+      background: color-mix(in srgb, white 15%, transparent);
+      display: grid;
+      &::after {
+        content: "";
+        inline-size: 100%;
+        block-size: 1px;
+        background: white;
+        animation: border 2s cubic-bezier(1,0,0,1) infinite;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,31 @@
+.link {
+  --space-min: 24px;
+  --space-max: 48px;
+  --space: clamp(
+    var(--space-min),
+    var(--space-min) + progress(100svi, 375px, 1280px) * (var(--space-max) - var(--space-min)),
+    var(--space-max)
+  );
+  inline-size: fit-content;
+  position: fixed;
+  inset-inline-end: calc(var(--space) + env(safe-area-inset-left));
+  inset-block-start: var(--space);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.25ch;
+  font-size: 14px;
+  color: white;
+  mix-blend-mode: difference;
+  z-index: 1;
+  &::after {
+    display: inline-grid;
+    content: '';
+    justify-self: end;
+    mask-image: var(--icon-arrow);
+    block-size: 0.8lh;
+    aspect-ratio: 1;
+    background-color: currentColor;
+    rotate: -45deg
+  }
+}

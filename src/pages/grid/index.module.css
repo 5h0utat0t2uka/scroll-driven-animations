@@ -1,0 +1,104 @@
+:root {
+  --inline-size: 90svi;
+  --block-size: 70svb;
+  --column-gap: 24px;
+}
+
+@keyframes scroll-column {
+  from {
+    transform: translateY(calc(-100% + var(--block-size)));
+  }
+  to {
+    transform: translateY(calc(100% - var(--block-size)));
+  }
+}
+
+.container {
+  --text-lg-min: 40px;
+  --text-lg-max: 56px;
+  --text-sm-min: 8px;
+  --text-sm-max: 12px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: clamp(
+      var(--text-lg-min),
+      var(--text-lg-min) + progress(100svi, 375px, 1280px) * (var(--text-lg-max) - var(--text-lg-min)),
+      var(--text-lg-max)
+    );
+  }
+  .hero, .footer {
+    block-size: 100svb;
+    display: grid;
+    background: blue;
+    color: whitesmoke;
+    text-align: center;
+  }
+  .hero {
+    > * {
+      grid-area: 1 / -1;
+    }
+    > h1 {
+      place-self: center;
+    }
+    > div {
+      place-self: end center;
+      mix-blend-mode: difference;
+    }
+  }
+  .footer {
+    place-content: center;
+    font-size: clamp(
+      var(--text-sm-min),
+      var(--text-sm-min) + progress(100svi, 375px, 1280px) * (var(--text-sm-max) - var(--text-sm-min)),
+      var(--text-sm-max)
+    );
+  }
+
+  .grid {
+    contain: strict;
+    container-type: inline-size scroll-state;
+    overflow: auto;
+    /*overscroll-behavior: contain;*/
+    scrollbar-width: none;
+    /*-webkit-overflow-scrolling: auto;*/
+
+    inline-size: var(--inline-size);
+    block-size: var(--block-size);
+    margin-inline: auto;
+    margin-block: calc((100svb - var(--block-size)) / 2);
+
+    .columns {
+      contain: content;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--column-gap);
+      overflow-y: clip;
+      > .column {
+        display: flex;
+        gap: var(--column-gap);
+        &:nth-child(odd) {
+          flex-direction: column;
+        }
+        &:nth-child(even) {
+          flex-direction: column-reverse;
+          transform: translateY(calc(-100% + var(--block-size)));
+          animation: scroll-column linear forwards;
+          /*animation-timeline: scroll(root block);*/
+          animation-timeline: scroll(block);
+        }
+        > .item {
+          aspect-ratio: 3/4;
+          object-fit: cover;
+          clip-path: inset(0 round 6px);
+        }
+      }
+    }
+  }
+}

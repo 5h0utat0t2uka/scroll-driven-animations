@@ -1,0 +1,93 @@
+@keyframes parallax-lg {
+  from { transform: translateY(3cqb) }
+  to { transform: translateY(6cqb) }
+}
+@keyframes parallax-md {
+  from { transform: translateY(80cqb) }
+  to { transform: translateY(0cqb) }
+}
+@keyframes parallax-sm {
+  from { transform: translateY(50cqb) }
+  to { transform: translateY(10cqb) }
+}
+
+.container {
+  --text-lg-min: 40px;
+  --text-lg-max: 56px;
+  --text-sm-min: 8px;
+  --text-sm-max: 12px;
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  h1 {
+    font-family: "Instrument Serif", serif;
+    font-weight: 100;
+    font-style: normal;
+    font-size: clamp(
+      var(--text-lg-min),
+      var(--text-lg-min) + progress(100svi, 375px, 1280px) * (var(--text-lg-max) - var(--text-lg-min)),
+      var(--text-lg-max)
+    );
+  }
+  .hero, .footer {
+    block-size: 100svb;
+    display: grid;
+    background: blue;
+    color: whitesmoke;
+    text-align: center;
+  }
+  .hero {
+    > * {
+      grid-area: 1 / -1;
+    }
+    > h1 {
+      place-self: center;
+    }
+    > div {
+      place-self: end center;
+      mix-blend-mode: difference;
+    }
+  }
+  .footer {
+    place-content: center;
+    font-size: clamp(
+      var(--text-sm-min),
+      var(--text-sm-min) + progress(100svi, 375px, 1280px) * (var(--text-sm-max) - var(--text-sm-min)),
+      var(--text-sm-max)
+    );
+  }
+
+  .parallax {
+    contain: strict;
+    position: relative;
+    display: grid;
+    aspect-ratio: 2/5;
+    isolation: isolate;
+    container-type: size;
+    > .item {
+      position: absolute;
+      grid-area: 1/-1;
+
+      &[data-size="sm"] {
+        clip-path: inset(0 round 6px);
+        animation: parallax-sm linear;
+        animation-timeline: scroll();
+        z-index: 2;
+      }
+      &[data-size="md"] {
+        clip-path: inset(0 round 8px);
+        animation: parallax-md linear;
+        animation-timeline: scroll();
+        z-index: 3;
+      }
+      &[data-size="lg"] {
+        clip-path: inset(0 round 16px);
+        animation: parallax-lg linear;
+        animation-timeline: scroll();
+        z-index: 1;
+      }
+    }
+  }
+}
