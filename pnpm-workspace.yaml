@@ -11,8 +11,8 @@ blockExoticSubdeps: true
 verifyDepsBeforeRun: install
 
 trustPolicy: no-downgrade
-# trustPolicyExclude:
-#   - semver@6.3.1
+trustPolicyExclude:
+  - semver@6.3.1
 
 minimumReleaseAge: 10080
 # minimumReleaseAgeExclude:
